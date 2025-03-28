@@ -5,12 +5,11 @@ terraform {
       version = "5.92.0"
     }
   }
-}
-
-provider "aws" {
-     # Configuration options
-  region = var.region
-  
+  backend "s3" {
+    bucket = "bucket4c3a46745d2cbc01"
+    key = "backen-tfstate"
+    region = "ap-south-1"
+  }
 }
 
 resource "random_id" "random_id" {
@@ -25,8 +24,4 @@ resource "aws_s3_object" "bucket_data" {
     bucket = aws_s3_bucket.demo-bucket.bucket
   source = "./myfile.txt"
   key = "mydata.txt"
-}
-
-output "name" {
-  value = random_id.random_id.b64_url
 }

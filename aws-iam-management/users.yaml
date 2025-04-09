@@ -1,0 +1,7 @@
+users:
+ - username: raju
+   roles: [AWSServiceRoleForECS]
+ - username: hello
+   roles: [assignment-dev-ap-south-1-lambdaRole]
+ - username: test
+   roles: [assignment-dev-us-east-1-lambdaRole,AWSServiceRoleForECS]

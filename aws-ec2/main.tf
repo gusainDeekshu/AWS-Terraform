@@ -26,6 +26,7 @@ resource "aws_instance" "myTerraformServer" {
   instance_type   = "t3.micro"
   vpc_security_group_ids =  [aws_security_group.my-sg.id]
   depends_on = [ aws_security_group.my-sg ]
+  associate_public_ip_address = false
   tags = {
     Name = "Sample_terraform_server"
   }
@@ -34,5 +35,13 @@ resource "aws_instance" "myTerraformServer" {
     # prevent_destroy = true
     # ignore_changes = [  ]
     replace_triggered_by = [ aws_security_group.my-sg ,aws_security_group.my-sg.ingress]
+ precondition {
+   condition = aws_security_group.my-sg.id != ""
+      error_message = "Securiy group id is empty"
+ } 
+    postcondition {
+      condition = self.public_ip != ""
+      error_message = "Public IP is empty"
+    }
   }
 }

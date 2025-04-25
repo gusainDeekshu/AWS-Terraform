@@ -1,0 +1,45 @@
+# ---------------------------------------------
+# Terraform State Commands Reference
+# ---------------------------------------------
+
+# 🔍 View State
+
+# List all resources in the current state
+terraform state list
+
+# Show detailed info about a specific resource
+terraform state show <resource_address>
+# Example:
+# terraform state show aws_instance.example
+
+# Pull raw state data (useful for inspection)
+terraform state pull
+
+# Push a local state file to remote backend (use with caution)
+terraform state push terraform.tfstate
+
+
+# 🔄 Modify State
+
+# Move a resource in the state file (e.g., rename or module migration)
+terraform state mv <source_address> <destination_address>
+# Example:
+# terraform state mv aws_instance.old aws_instance.new
+
+# Remove a resource from state (does NOT destroy it in real infra)
+terraform state rm <resource_address>
+# Example:
+# terraform state rm aws_s3_bucket.my_bucket
+
+# Replace the provider for existing resources
+terraform state replace-provider -- <old_provider> <new_provider>
+# Example:
+# terraform state replace-provider -- registry.terraform.io/-/aws registry.terraform.io/hashicorp/aws
+
+
+# ⚠️ Notes:
+# - Always back up your state file before making changes.
+# - These commands modify the state only, not actual infrastructure.
+# - Useful for state corrections, refactors, or provider changes.
+
+# ---------------------------------------------

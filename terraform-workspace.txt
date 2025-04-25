@@ -1,0 +1,27 @@
+# 🟢 Show the current workspace
+terraform workspace show
+
+# 📜 List all workspaces
+terraform workspace list
+
+# ➕ Create a new workspace
+terraform workspace new <workspace-name>
+
+# 🔁 Switch to an existing workspace
+terraform workspace select <workspace-name>
+
+# ❌ Delete a workspace (you can't delete the current one)
+terraform workspace delete <workspace-name>
+
+# 💡 Notes:
+# - Workspaces isolate the state file, not the actual infrastructure.
+# - Useful for managing environments like dev, staging, and prod with the same code.
+# - Each workspace stores its own terraform.tfstate file under `.terraform/`.
+
+# 📂 Example usage:
+terraform workspace new dev
+terraform workspace new staging
+terraform workspace select dev
+terraform apply
+terraform workspace select staging
+terraform apply
